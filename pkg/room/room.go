@@ -1,5 +1,9 @@
 package room_pool
 
 type Room struct {
-	roomTitle string
+	Title       string
+	Host        string
+	Players     []Player
+	QuetionList []Question
+	Status      int
 }
