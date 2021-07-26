@@ -6,12 +6,20 @@ type Dependencies struct {
 	HomeTemplate string
 }
 
+type RoomManager interface {
+	CreateRoom(title string, host string, questionsList []Question) error
+	DeleteRoom(title string) error
+	GetAllRooms() []string
+}
+
 type Service struct {
+	RoomManager
 	Hub *hub.Hub
 }
 
 func NewService(hub *hub.Hub) *Service {
 	return &Service{
-		Hub: hub,
+		Hub:         hub,
+		RoomManager: CreateRoomManagerService(),
 	}
 }
