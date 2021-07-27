@@ -1,8 +1,8 @@
-package service
+package repository
 
 import (
+	redis "github.com/go-redis/redis/v8"
 	"github.com/unheilbar/what_where_when"
-	"github.com/unheilbar/what_where_when/pkg/repository"
 )
 
 type RoomManager interface {
@@ -21,20 +21,14 @@ type Room interface {
 	GetTopPlayers() []what_where_when.Player
 }
 
-type Questions interface {
-	GetQuestionsList() ([]what_where_when.Question, error)
-}
-
-type Services struct {
+type Repository struct {
 	RoomManager
 	Room
-	Questions
 }
 
-func NewServices(repo *repository.Repository) *Services {
-	return &Services{
-		RoomManager: CreateRoomManagerService(),
-		Room:        CreateRoomService(),
-		Questions:   CreateQuestionsService(),
+func NewRepository(c *redis.Client) *Repository {
+	return &Repository{
+		RoomManager: CreateRoomManagerRedis(c),
+		Room:        CreateRoomRedis(c),
 	}
 }

@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/unheilbar/what_where_when/pkg/hub"
 )
 
 func (h *Handler) ws(c *gin.Context) {
@@ -15,5 +14,5 @@ func (h *Handler) ws(c *gin.Context) {
 		c.Status(403)
 		return
 	}
-	hub.ServeWs(h.services.Hub, c.Writer, c.Request, clientToken)
+	//hub.ServeWs(h.services.Hub, c.Writer, c.Request, clientToken)
 }
