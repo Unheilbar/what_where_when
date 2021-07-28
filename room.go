@@ -6,7 +6,7 @@ type Room struct {
 	Id           int
 	Title        string
 	QuestionList []Question
-	Host         int
+	Host         string
 	Status       int
 	PlayerList   []Player
 	Created      time.Time

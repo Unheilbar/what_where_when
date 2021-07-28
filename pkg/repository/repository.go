@@ -6,9 +6,9 @@ import (
 )
 
 type RoomManager interface {
-	CreateRoom(title string, host uint, questionList []what_where_when.Question) error
-	RemoveRoom(id uint) error
-	GetRoomById(id uint) what_where_when.Room
+	CreateRoom(title string, host string, questionList []what_where_when.Question) error
+	RemoveRoom(title string) error
+	GetRoomByTitle(title string) what_where_when.Room
 	GetAllRooms() []what_where_when.Room
 }
 

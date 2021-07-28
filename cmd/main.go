@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -33,6 +34,14 @@ func main() {
 	}
 
 	repo := repository.NewRepository(rdb)
+
+	err = repo.RoomManager.CreateRoom("Novaya_komnata", "ya", []what_where_when.Question{})
+
+	fmt.Println(err)
+
+	err = repo.RoomManager.RemoveRoom("Novaya_komnata")
+
+	fmt.Println(err)
 
 	services := service.NewServices(repo)
 
