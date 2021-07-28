@@ -9,7 +9,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	redis "github.com/go-redis/redis/v8"
 	"github.com/sirupsen/logrus"
 	"github.com/unheilbar/what_where_when"
 	"github.com/unheilbar/what_where_when/pkg/handler"
@@ -22,11 +21,16 @@ func main() {
 	nhub := hub.NewHub()
 	go nhub.Run()
 
-	rdb := redis.NewClient(&redis.Options{
+	rdb, err := repository.NewRedisDB(repository.Config{
 		Addr:     "localhost:6379",
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
+
+	if err != nil {
+		logrus.Fatal("Can't initiate redis storage")
+		panic(err)
+	}
 
 	repo := repository.NewRepository(rdb)
 

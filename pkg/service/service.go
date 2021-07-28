@@ -13,12 +13,12 @@ type RoomManager interface {
 }
 
 type Room interface {
-	AddPlayer(nickname string) error
-	RemovePlayer(id uint) error
-	Guess(playerId uint, guess string) (bool, error)
-	NextQuestion() bool
-	AddPointsToPlayer(id, points uint)
-	GetTopPlayers() []what_where_when.Player
+	AddPlayer(player what_where_when.Player, roomId uint) error
+	RemovePlayer(playerId uint, roomId uint) error
+	Guess(roomId, playerId uint, guess string) (bool, error)
+	NextQuestion(roomId uint) bool
+	AddPointsToPlayer(roomId, playerId, points uint) error
+	GetAllPlayers(roomId uint) []what_where_when.Player
 }
 
 type Questions interface {
